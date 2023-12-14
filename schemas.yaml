@@ -1,0 +1,117 @@
+# yaml file with data schemas
+
+# define card schema, which query schema will extend
+# seq exists to handle the sorting order for pandas
+candidate: &candidate
+  candidate:
+    seq: 2
+    dtype: "int64"
+    tf_map: "c_emb_input"
+  name:
+    seq: 3
+    dtype: "str"
+    tf_map: "drop"
+  cmc:
+    seq: 4
+    dtype: "int64"
+    tf_map: "c_numeric"
+  power: 
+    seq: 5
+    dtype: "int64"
+    tf_map: "c_numeric"
+  toughness: 
+    seq: 6
+    dtype: "int64"
+    tf_map: "c_numeric"
+  loyalty: 
+    seq: 7
+    dtype: "int64"
+    tf_map: "c_numeric"
+  rarity: 
+    seq: 8
+    dtype: "int64"
+    tf_map: "c_numeric"
+  legendary:
+    seq: 9
+    dtype: "int64"
+    tf_map: "c_numeric"
+  x_spell: 
+    seq: 10
+    dtype: "int64"
+    tf_map: "c_numeric"
+  creature: 
+    seq: 11
+    dtype: "int64"
+    tf_map: "c_numeric"
+  land: 
+    seq: 12
+    dtype: "int64"
+    tf_map: "c_numeric"
+  artifact:
+    seq: 13
+    dtype: "int64"
+    tf_map: "c_numeric"
+  enchantment: 
+    seq: 14
+    dtype: "int64"
+    tf_map: "c_numeric"
+  planeswalker: 
+    seq: 15
+    dtype: "int64"
+    tf_map: "c_numeric"
+  instant: 
+    seq: 16
+    dtype: "int64"
+    tf_map: "c_numeric"
+  sorcery: 
+    seq: 17
+    dtype: "int64"
+    tf_map: "c_numeric"
+  subtype: 
+    seq: 18
+    dtype: "str"
+    tf_map: "c_subtype"
+  oracle_categories_x:
+    seq: 19
+    dtype: "str"
+    tf_map: "c_oracle"
+  white:
+    seq: 20
+    dtype: "int64"
+    tf_map: "c_numeric"
+  blue: 
+    seq: 21
+    dtype: "int64"
+    tf_map: "c_numeric"
+  black: 
+    seq: 22
+    dtype: "int64"
+    tf_map: "c_numeric"
+  red: 
+    seq: 23
+    dtype: "int64"
+    tf_map: "c_numeric"
+  green: 
+    seq: 24
+    dtype: "int64"
+    tf_map: "c_numeric"
+
+# define query schema as an extension of candidate schema
+query:
+  user: 
+    seq: 0
+    dtype: "int64"
+    tf_map: "drop"
+  query:
+    seq: 1
+    dtype: "int64"
+    tf_map: "q_emb_input"
+  <<: *candidate
+  oracle_categories_y:
+    seq: 26
+    dtype: "str"
+    tf_map: "q_oracle"
+  color_family: 
+    seq: 27
+    dtype: "str"
+    tf_map: "q_color"

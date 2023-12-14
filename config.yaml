@@ -1,0 +1,123 @@
+# yaml file for managing the configuration
+
+# hyperparameters for the model
+params:
+    bool:
+        use_q_latent: True
+        use_q_color: True
+        use_q_oracle: True
+        use_c_latent: True
+        use_c_numeric: True
+        use_c_subtype: True
+        use_c_oracle: True
+    int:
+        n_proj_layers:
+            min: 1
+            max: 3
+            step: 1
+        dims_proj_0:
+            min: 16
+            max: 256
+            step: 16
+        dims_proj_1:
+            min: 16
+            max: 128
+            step: 16
+        dims_proj_2:
+            min: 16
+            max: 128
+            step: 16
+        n_rank_layers:
+            min: 1
+            max: 3
+            step: 1
+        dims_rank_0:
+            min: 16
+            max: 128
+            step: 16
+        dims_rank_1:
+            min: 16
+            max: 128
+            step: 16
+        dims_rank_2:
+            min: 16
+            max: 128
+            step: 64
+    float:
+        lr:
+            min: 0.05
+            max: 0.1
+            sampling: linear
+        loss_weight_retrieval:
+            min: 0.25
+            max: 0.75
+            sampling: linear
+    fixed:
+        n_colors: 32
+        max_len_oracle: 9
+        max_len_subtype: 5
+        batch_size_train: 8000
+        batch_size_test: 4000
+        batch_size_index: 128
+        max_trials: 3
+        epochs: 1
+        k: 100
+        seed: 42
+        patience: 3
+        test_ratio: 0.2
+    choice:
+        activation_proj:
+            - relu
+            - tanh
+        activation_rank:
+            - relu
+            - tanh
+    conditional:
+        dims_q_latent:
+            cond: use_q_latent
+            min: 32
+            max: 256
+            step: 32
+        dims_q_color:
+            cond: use_q_color
+            min: 8
+            max: 32
+            step: 8
+        dims_q_oracle:
+            cond: use_q_oracle
+            min: 8
+            max: 32
+            step: 8
+        dims_c_latent:
+            cond: use_c_latent
+            min: 32
+            max: 256
+            step: 32
+        dims_c_numeric:
+            cond: use_c_numeric
+            value: 19
+        dims_c_subtype:
+            cond: use_c_subtype
+            min: 8
+            max: 32
+            step: 8
+        dims_c_oracle:
+            cond: use_c_oracle
+            min: 8
+            max: 32
+            step: 8
+
+# paths to the inputs and outputs
+paths:
+    queries:
+        filepath: "datasets/queries.txt"
+        header: 1
+        sep: ";" 
+    candidates: 
+        filepath: "datasets/candidates.txt"
+        header: 0
+        sep: ";"
+    schemas: schemas.yaml
+    weights: results/models/weights
+    ranking_model: results/models/ranking_model
+    logs: ./logs
